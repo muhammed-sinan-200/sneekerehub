@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Col, Container, Row, Card } from 'react-bootstrap'
-import './CSS/newArrivals.css'
+import './CSS/NewArrivals.css'
 import { TbShoppingBagPlus } from "react-icons/tb";
 
 const NewArrivalsComp = ({ onProductClick }) => {
