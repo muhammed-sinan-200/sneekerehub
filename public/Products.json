@@ -1,0 +1,90 @@
+[
+    {
+        "id":1,
+        "name":"Nike Alpha 'TheSting'",
+        "price":2899,
+        "img":"/product-img/product1.webp",
+        "sizes":["6","7","8","9","10"]
+    },
+    {
+        "id":2,
+        "name":"Nike Blue Spark",
+        "price":6799,
+        "img":"/product-img/product2.webp",
+        "sizes":["6","7","8","9","10"]
+    },
+    {
+        "id":3,
+        "name":"Adidas SeaGreen",
+        "price":4100,
+        "img":"/product-img/product3.png",
+        "sizes":["6","7","8","9","10"]
+    },
+    {
+        "id":4,
+        "name":"AirJordan OG",
+        "price":2599,
+        "img":"/product-img/product4.webp",
+        "sizes":["6","7","8","9","10"]
+    },
+    {
+        "id":5,
+        "name":"Nike SB Verdugo",
+        "price":3400,
+        "img":"/product-img/product5.webp",
+        "category":"new",
+        "sizes":["6","7","8","9","10"]
+    },
+    {
+        "id":6,
+        "name":"Nike Air Mint985",
+        "price":3200,
+        "img":"/product-img/product6.webp",
+        "sizes":["6","7","8","9","10"]
+    },
+    {
+        "id":7,
+        "name":"New Balance 2002R Phantom",
+        "price":1900,
+        "img":"/product-img/product7.webp",
+        "sizes":["6","7","8","9","10"]
+    },
+    {
+        "id":8,
+        "name":"AirJordan 4Tex Denim",
+        "price":1750,
+        "img":"/product-img/product8.webp",
+        "sizes":["6","7","8","9","10"]
+    },
+    {
+        "id":9,
+        "name":"Levis x Nike AirMax",
+        "price":1700,
+        "img":"/product-img/product9.webp",
+        "category":"new",
+        "sizes":["6","7","8","9","10"]
+    },
+    {
+        "id":10,
+        "name":"Nike DunkLow Panda",
+        "price":1750,
+        "img":"/product-img/product10.webp",
+        "sizes":["6","7","8","9","10"]
+    },
+    {
+        "id":11,
+        "name":"Nike Air Max TAXI",
+        "price":6999,
+        "img":"/product-img/product11.webp",
+        "category":"new",
+        "sizes":["6","7","8","9","10"]
+    },
+    {
+        "id":12,
+        "name":"Puma SpeedCat Green",
+        "price":1980,
+        "img":"/product-img/product12.webp",
+        "category":"new",
+        "sizes":["6","7","8","9","10"]
+    }
+]

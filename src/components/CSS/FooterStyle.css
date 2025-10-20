@@ -1,0 +1,16 @@
+.follow-icons{
+    color: black;
+}
+.ig:hover{
+    color: rgb(236, 0, 63);
+}
+
+.utube:hover{
+    color: red;
+}
+.fb:hover{
+    color: rgb(10, 10, 255);
+}
+img{
+    color:rgb(103, 103, 103);
+}
