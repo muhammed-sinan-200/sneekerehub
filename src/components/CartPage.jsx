@@ -1,82 +1,177 @@
-import React, { useContext } from 'react'
-import { CartContext } from './CartContext'
-import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
+import React, { useContext } from "react";
+import { CartContext } from "./CartContext";
+import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
 
 const CartPage = () => {
   const { cartItems, addToCart, decreaseQuantity } = useContext(CartContext);
+
   const totalPrice = cartItems.reduce(
-    (total, item) => total + (Number(item.price) || 0) * (item.quantity || 0), 0)
+    (total, item) => total + (Number(item.price) || 0) * (item.quantity || 0),
+    0
+  );
+
   return (
-    <Container fluid className='my-5' style={{ minHeight: '100vh' }}>
-      <Row>
-        <Col md={6} className=''>
-          <h3>Special offers waiting for you</h3>
-          <div className='adv-div'
-          style={{
-          height:"250px",
-          width:'80%',
-          backgroundColor:"light",
-          border:'1px solid',
-          }}
-          >
-            <iframe 
-            title='adv'
-            src='https://source.unsplash.com/800x300/?advertisement'
-            width='100%'
-            height='100%'
-            loading='lazy'
+    <Container
+      fluid="md"
+      className="py-5"
+      style={{
+        minHeight: "90vh",
+        backgroundColor: "#f5f7fa",
+      }}
+    >
+      <div className="text-center mb-5">
+        <p className="text-muted">Review your items and complete your purchase</p>
+      </div>
+
+      {cartItems.length === 0 ? (
+        // ✅ Empty Cart Layout (kept as-is)
+        <div className="text-center py-5">
+          <Image
+            src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png"
+            alt="empty-cart"
+            width="140"
+            className="mb-4 opacity-75"
+          />
+          <h5 className="text-muted mb-2">Your cart is empty 🛒</h5>
+          <p className="text-secondary">Start shopping to fill it up!</p>
+        </div>
+      ) : (
+        // ✅ New Premium Product Layout
+        <Row className="justify-content-center">
+          <Col md={8} lg={7}>
+            <Card
+              className="border-0 shadow-sm rounded-4 mb-4 p-3"
+              style={{
+                background: "#fff",
+                borderRadius: "16px",
+              }}
             >
-
-            </iframe>
-          </div>
-        </Col>
-
-        <Col md={6}>
-          <h3>Your Cart ({cartItems.length})</h3>
-          {cartItems.length === 0 ? (
-            <p>OOPS, Empty🛒</p>
-          ) : (
-            <div>
-              {cartItems.map((item) => (
-                <Row key={item.id} className='bg-light align-items-center mb-4 border-bottom'>
-                  <Col>
+              {cartItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  className={`d-flex flex-wrap align-items-center justify-content-between py-3 ${
+                    index !== cartItems.length - 1 ? "border-bottom" : ""
+                  }`}
+                  style={{
+                    transition: "background 0.3s ease",
+                  }}
+                >
+                  <div className="d-flex align-items-center gap-3">
                     <Image
                       src={item.img}
-                      fluid rounded
-                      style={{ maxHeight: '150px', objectFit: 'cover' }}
+                      alt={item.name}
+                      rounded
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        objectFit: "cover",
+                        boxShadow: "0 3px 8px rgba(0,0,0,0.1)",
+                      }}
                     />
-                  </Col>
-                  <Col>
-                    <h4>{item.name}</h4>
-                    <h5>$ {item.price}</h5>
-                    <h6>size: UK {item.selectedSize}</h6>
-                  </Col>
-                  <Col className='d-flex gap-3'>
-                    <Button
-                      variant='outline-secondary' 
-                      size='md'
-                      onClick={() => decreaseQuantity(item.id)}>-</Button>
-                    <span className='mt-2'><p>{item.quantity}</p></span>
-                    <Button
-                      variant='outline-secondary'
-                      size='md'
-                      onClick={() => addToCart(item)}>+</Button>
-                  </Col>
-                  {/* <Col>${(item.price * item.quantity).toFixed(0)}</Col> */}
-                </Row>
-              ))}
-              <Row>
-            <Col className='text-end'>
-              <Button onClick={()=>alert('Your Order is placed')} 
-              variant='secondary' className='fw-bold checkout-btn'> CheckOut $ {totalPrice.toFixed(0)}</Button>
-            </Col>
-          </Row>
-            </div>
-          )}
-        </Col>
-      </Row>
-    </Container>
-  )
-}
+                    <div>
+                      <h5 className="fw-semibold mb-1">{item.name}</h5>
+                      <p className="text-muted small mb-1">
+                        Size: UK {item.selectedSize}
+                      </p>
+                      <h6 className="fw-bold text-dark mb-0">
+                        $ {item.price}
+                      </h6>
+                    </div>
+                  </div>
 
-export default CartPage
+                  <div className="d-flex align-items-center gap-3 mt-3 mt-md-0">
+                    <Button
+                      variant="light"
+                      size="sm"
+                      className="rounded-circle border"
+                      style={{
+                        width: "36px",
+                        height: "36px",
+                        lineHeight: "1.2",
+                      }}
+                      onClick={() => decreaseQuantity(item.id)}
+                    >
+                      –
+                    </Button>
+                    <span className="fw-semibold fs-5">{item.quantity}</span>
+                    <Button
+                      variant="light"
+                      size="sm"
+                      className="rounded-circle border"
+                      style={{
+                        width: "36px",
+                        height: "36px",
+                        lineHeight: "1.2",
+                      }}
+                      onClick={() => addToCart(item)}
+                    >
+                      +
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </Card>
+          </Col>
+
+          {/* ✅ Summary Section */}
+          <Col md={4} lg={3}>
+            <Card
+              className="border-0 shadow rounded-4 sticky-top p-4"
+              style={{
+                top: "90px",
+                background: "#ffffff",
+                zIndex:"1"
+              }}
+            >
+              <div className="text-center mb-4">
+                <h5 className="fw-bold">Order Summary</h5>
+                {/* <p className="text-muted small">
+                  Free delivery on all orders above $20 🎉
+                </p> */}
+              </div>
+
+              <div className="d-flex justify-content-between mb-3">
+                <span className="text-muted">Subtotal</span>
+                <span className="fw-semibold">$ {totalPrice.toFixed(2)}</span>
+              </div>
+
+              <div className="d-flex justify-content-between mb-3">
+                <span className="text-muted">Shipping</span>
+                <span className="fw-semibold text-success">Free</span>
+              </div>
+
+              <div className="d-flex justify-content-between align-items-center mb-4 border-top pt-3">
+                <h5 className="fw-bold">Total</h5>
+                <h5 className="fw-bold text-success">
+                  $ {totalPrice.toFixed(2)}
+                </h5>
+              </div>
+
+              <Button
+                variant="dark"
+                size="lg"
+                className="w-100 rounded-4 py-2 fw-semibold shadow-sm"
+                onClick={() => alert("Your order is placed")}
+                style={{
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = "#343a40";
+                  e.target.style.transform = "scale(1.03)";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = "#000";
+                  e.target.style.transform = "scale(1)";
+                }}
+              >
+                 Checkout
+              </Button>
+            </Card>
+          </Col>
+        </Row>
+      )}
+    </Container>
+  );
+};
+
+export default CartPage;
