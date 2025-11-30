@@ -44,11 +44,7 @@ const ProductModal = ({show,product,onClose}) => {
                         </div>
                         <div className='d-flex gap-4 mt-5'>
                             <Button  variant='light' className='border border-1 border-black rounded-0 cart-btn'
-                            //  onClick={() => {
-                                
-                            //     addToCart(product);
-                            //     onClose();
-                            //  }}
+                            
                             onClick={handleAddToCart}
                              >Add to Cart</Button>
                             <Button variant='black' className='border border-1 border-black rounded-0 cart-btn'>View More</Button>

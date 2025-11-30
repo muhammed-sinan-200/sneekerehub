@@ -24,7 +24,6 @@ const CartPage = () => {
       </div>
 
       {cartItems.length === 0 ? (
-        // ✅ Empty Cart Layout (kept as-is)
         <div className="text-center py-5">
           <Image
             src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png"
@@ -36,7 +35,6 @@ const CartPage = () => {
           <p className="text-secondary">Start shopping to fill it up!</p>
         </div>
       ) : (
-        // ✅ New Premium Product Layout
         <Row className="justify-content-center">
           <Col md={8} lg={7}>
             <Card
@@ -113,7 +111,6 @@ const CartPage = () => {
             </Card>
           </Col>
 
-          {/* ✅ Summary Section */}
           <Col md={4} lg={3}>
             <Card
               className="border-0 shadow rounded-4 sticky-top p-4"
@@ -125,9 +122,6 @@ const CartPage = () => {
             >
               <div className="text-center mb-4">
                 <h5 className="fw-bold">Order Summary</h5>
-                {/* <p className="text-muted small">
-                  Free delivery on all orders above $20 🎉
-                </p> */}
               </div>
 
               <div className="d-flex justify-content-between mb-3">

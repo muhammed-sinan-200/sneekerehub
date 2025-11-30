@@ -1,8 +1,7 @@
-import React, { useContext } from 'react'
+import  { useContext } from 'react'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import { Form } from 'react-bootstrap';
 import { CiUser } from 'react-icons/ci'
 import { PiShoppingCartSimpleThin } from 'react-icons/pi'
 import { Link } from 'react-router-dom';

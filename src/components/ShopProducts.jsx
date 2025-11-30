@@ -41,8 +41,6 @@ const ShopProducts = ({onProductClick}) => {
                     </Col>
                 ))}
             </Row>
-            {/* <Row className='text-end mb-2'><Link className='text-decoration-none text-dark 
-            fw-semibold'>Show more <span className='fw-semibold'>+</span></Link></Row> */}
         </Container>
     )
 }
