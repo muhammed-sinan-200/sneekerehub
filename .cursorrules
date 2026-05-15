@@ -1,0 +1,30 @@
+This project is a React-to-Next.js migration for a sneaker e-commerce frontend.
+
+Tech stack:
+- Next.js (App Router)
+- JavaScript
+- Tailwind CSS
+- Framer Motion only when necessary
+
+Rules:
+- Preserve the existing UI structure, responsiveness, and overall UX behavior
+- Modernize the UI to feel cleaner, premium, and production-ready without changing the core design identity
+- Avoid Bootstrap-style crowded layouts and outdated spacing patterns
+- Keep layouts visually consistent with the original project while improving polish and maintainability
+- Do NOT heavily redesign components unless explicitly requested
+- Do NOT modify unrelated files
+- Do NOT overwrite or delete the old React implementation during migration
+- Migrate incrementally component-by-component
+- Use modular, reusable, scalable component architecture
+- Use Tailwind CSS only for styling
+- Avoid unnecessary complexity, overengineering, and excessive abstractions
+- Preserve accessibility and responsive behavior
+- Use clean production-style code organization
+- Prefer reusable UI patterns and optimized rendering practices
+
+When generating code:
+- Analyze the existing implementation first
+- Preserve functionality and UX behavior
+- Keep JSX structure clean and minimal
+- Keep responsiveness intact across all breakpoints
+- Make the UI feel more modern and premium without changing the overall layout structure

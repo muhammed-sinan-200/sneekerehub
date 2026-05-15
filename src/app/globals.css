@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Montserrat is injected as --font-montserrat by next/font in layout.js */
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ─── Shimmer sweep on section headings (NEW ARRIVALS, SNEEKERS) ─────────── */
+
+@keyframes shimmer-wave {
+  0%   { left: 5%; }
+  100% { left: 70%; }
+}
+
+@layer components {
+  .shimmer-heading {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .shimmer-heading::after {
+    content: '';
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    top: 0;
+    left: -75%;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    animation: shimmer-wave 3s linear infinite;
+  }
+}
