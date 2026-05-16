@@ -11,7 +11,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: "SneekerHub",
+  title: "SneekerHub Next",
   description: "Elevate your style — premium sneakers",
   icons: {
     icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7GhFWiVPAAb-py74iYchtHb6DPGmKBrPqTA&s",
