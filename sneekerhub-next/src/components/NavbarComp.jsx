@@ -9,9 +9,21 @@ import {
   HiOutlineMagnifyingGlass,
   HiOutlineBars3,
   HiOutlineXMark,
+  HiOutlineArrowRightOnRectangle,
 } from "react-icons/hi2";
+import { useUser, useClerk } from "@clerk/nextjs";
 import { useCart } from "@/context/CartContext";
 import { LOGO_SRC } from "@/lib/site";
+
+function SignedIn({ children }) {
+  const { isLoaded, isSignedIn } = useUser();
+  return isLoaded && isSignedIn ? children : null;
+}
+
+function SignedOut({ children }) {
+  const { isLoaded, isSignedIn } = useUser();
+  return isLoaded && !isSignedIn ? children : null;
+}
 
 const NAV_LINKS = [
   { href: "/", label: "HOME" },
@@ -59,15 +71,37 @@ export default function NavbarComp() {
   const [searchValue, setSearchValue] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
   const [announcementDismissed, setAnnouncementDismissed] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const searchInputRef = useRef(null);
+  const userMenuRef = useRef(null);
 
   const { cartItems, isHydrated } = useCart();
   const cartCount = isHydrated ? cartItems.length : 0;
   const cartBadge = cartCount > 99 ? "99+" : cartCount;
 
+  const { user } = useUser();
+  const { signOut } = useClerk();
+
   const closeMenu = () => setIsOpen(false);
   const closeSearch = () => setIsSearchOpen(false);
+  const closeUserMenu = () => setIsUserMenuOpen(false);
+
+  const userInitial =
+    (user?.firstName?.[0] || user?.username?.[0] || "U").toUpperCase();
+  const userDisplayName =
+    user?.fullName || user?.firstName || user?.username || "Account";
+  const userEmail = user?.primaryEmailAddress?.emailAddress || "";
+
+  const handleSignOut = async () => {
+    closeUserMenu();
+    closeMenu();
+    try {
+      await signOut({ redirectUrl: "/" });
+    } catch {
+      // Clerk may throw if already signed out — safe to ignore.
+    }
+  };
 
   useEffect(() => {
     try {
@@ -104,6 +138,7 @@ export default function NavbarComp() {
       if (e.key === "Escape") {
         setIsOpen(false);
         setIsSearchOpen(false);
+        setIsUserMenuOpen(false);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -113,7 +148,19 @@ export default function NavbarComp() {
   useEffect(() => {
     setIsOpen(false);
     setIsSearchOpen(false);
+    setIsUserMenuOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!isUserMenuOpen) return;
+    const onPointerDown = (e) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    return () => document.removeEventListener("mousedown", onPointerDown);
+  }, [isUserMenuOpen]);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8);
@@ -227,14 +274,85 @@ export default function NavbarComp() {
                 <HiOutlineMagnifyingGlass className="h-[22px] w-[22px]" />
               </button>
 
-              <Link
-                href="/"
-                onClick={closeMenu}
-                className="hidden h-10 w-10 items-center justify-center rounded-full text-gray-800 transition-colors duration-200 hover:bg-gray-100 hover:text-black sm:inline-flex"
-                aria-label="Account"
-              >
-                <HiOutlineUser className="h-[22px] w-[22px]" />
-              </Link>
+              <SignedOut>
+                <div className="hidden items-center gap-1.5 sm:flex">
+                  <Link
+                    href="/sign-in"
+                    onClick={closeMenu}
+                    className="inline-flex items-center justify-center rounded-full px-3.5 py-2 text-[11.5px] font-semibold uppercase tracking-[0.18em] text-gray-800 transition-colors duration-200 hover:bg-gray-100 hover:text-black"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/sign-up"
+                    onClick={closeMenu}
+                    className="inline-flex items-center justify-center rounded-full bg-black px-3.5 py-2 text-[11.5px] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-200 hover:bg-[#ff8800] hover:text-black"
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              </SignedOut>
+
+              <SignedIn>
+                <div
+                  className="relative hidden sm:block"
+                  ref={userMenuRef}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setIsUserMenuOpen((v) => !v)}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-800 transition-colors duration-200 hover:bg-gray-100 hover:text-black"
+                    aria-label="Open account menu"
+                    aria-haspopup="menu"
+                    aria-expanded={isUserMenuOpen}
+                  >
+                    {user?.imageUrl ? (
+                      <img
+                        src={user.imageUrl}
+                        alt=""
+                        className="h-8 w-8 rounded-full object-cover ring-1 ring-black/10"
+                      />
+                    ) : (
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-gray-900 to-gray-700 text-[11px] font-bold uppercase text-white">
+                        {userInitial}
+                      </span>
+                    )}
+                  </button>
+
+                  <div
+                    role="menu"
+                    aria-label="Account menu"
+                    aria-hidden={!isUserMenuOpen}
+                    className={`absolute right-0 top-full z-50 mt-2 w-64 origin-top-right rounded-2xl bg-white shadow-[0_20px_60px_rgba(15,23,42,0.18)] ring-1 ring-black/5 transition-all duration-200 ease-out motion-reduce:transition-none ${
+                      isUserMenuOpen
+                        ? "translate-y-0 scale-100 opacity-100"
+                        : "pointer-events-none -translate-y-1 scale-95 opacity-0"
+                    }`}
+                  >
+                    <div className="border-b border-black/5 px-4 py-3">
+                      <p className="truncate text-[13px] font-semibold text-gray-900">
+                        {userDisplayName}
+                      </p>
+                      {userEmail && (
+                        <p className="truncate text-[11.5px] text-gray-500">
+                          {userEmail}
+                        </p>
+                      )}
+                    </div>
+                    <div className="py-1.5">
+                      <button
+                        type="button"
+                        onClick={handleSignOut}
+                        role="menuitem"
+                        className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-[12.5px] font-medium text-gray-800 transition-colors hover:bg-gray-50 hover:text-black"
+                      >
+                        <HiOutlineArrowRightOnRectangle className="h-4 w-4 text-gray-500" />
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </SignedIn>
 
               <Link
                 href="/cartPage"
@@ -346,6 +464,51 @@ export default function NavbarComp() {
           </button>
         </div>
 
+        <SignedOut>
+          <div className="grid grid-cols-2 gap-2.5 border-b border-black/5 px-5 py-4">
+            <Link
+              href="/sign-in"
+              onClick={closeMenu}
+              className="inline-flex items-center justify-center rounded-full border border-black/15 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-900 transition-colors hover:border-black hover:bg-black hover:text-white"
+            >
+              Login
+            </Link>
+            <Link
+              href="/sign-up"
+              onClick={closeMenu}
+              className="inline-flex items-center justify-center rounded-full bg-black px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#ff8800] hover:text-black"
+            >
+              Sign Up
+            </Link>
+          </div>
+        </SignedOut>
+
+        <SignedIn>
+          <div className="flex items-center gap-3 border-b border-black/5 px-5 py-4">
+            {user?.imageUrl ? (
+              <img
+                src={user.imageUrl}
+                alt=""
+                className="h-11 w-11 rounded-full object-cover ring-1 ring-black/10"
+              />
+            ) : (
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-gray-900 to-gray-700 text-sm font-bold uppercase text-white">
+                {userInitial}
+              </span>
+            )}
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-semibold text-gray-900">
+                {userDisplayName}
+              </p>
+              {userEmail && (
+                <p className="truncate text-[12px] text-gray-500">
+                  {userEmail}
+                </p>
+              )}
+            </div>
+          </div>
+        </SignedIn>
+
         <form
           onSubmit={handleSearchSubmit}
           className="border-b border-black/5 px-5 py-4"
@@ -410,14 +573,26 @@ export default function NavbarComp() {
 
         <div className="border-t border-black/5 bg-white px-5 py-5">
           <div className="grid grid-cols-2 gap-3">
-            <Link
-              href="/"
-              onClick={closeMenu}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-900 transition-colors hover:border-black hover:bg-black hover:text-white"
-            >
-              <HiOutlineUser className="h-4 w-4" />
-              Account
-            </Link>
+            <SignedOut>
+              <Link
+                href="/sign-in"
+                onClick={closeMenu}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-900 transition-colors hover:border-black hover:bg-black hover:text-white"
+              >
+                <HiOutlineUser className="h-4 w-4" />
+                Sign In
+              </Link>
+            </SignedOut>
+            <SignedIn>
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-900 transition-colors hover:border-black hover:bg-black hover:text-white"
+              >
+                <HiOutlineArrowRightOnRectangle className="h-4 w-4" />
+                Logout
+              </button>
+            </SignedIn>
             <Link
               href="/cartPage"
               onClick={closeMenu}

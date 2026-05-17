@@ -1,4 +1,5 @@
 import { Montserrat } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import AppProviders from "@/components/providers/AppProviders";
 import NavbarComp from "@/components/NavbarComp";
 import FooterComp from "@/components/FooterComp";
@@ -20,16 +21,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${montserrat.variable} h-full scroll-smooth`}>
-      <body
-        className={`${montserrat.className} flex min-h-full flex-col bg-white text-gray-900 antialiased`}
-      >
-        <AppProviders>
-          <NavbarComp />
-          <main className="flex-1">{children}</main>
-          <FooterComp />
-        </AppProviders>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className={`${montserrat.variable} h-full scroll-smooth`}>
+        <body
+          className={`${montserrat.className} flex min-h-full flex-col bg-white text-gray-900 antialiased`}
+        >
+          <AppProviders>
+            <NavbarComp />
+            <main className="flex-1">{children}</main>
+            <FooterComp />
+          </AppProviders>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
