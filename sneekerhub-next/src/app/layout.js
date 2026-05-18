@@ -22,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${montserrat.variable} h-full scroll-smooth`}>
+      <html lang="en" className={`${montserrat.variable} h-full data-scroll-behavior="smooth"`}>
         <body
           className={`${montserrat.className} flex min-h-full flex-col bg-white text-gray-900 antialiased`}
         >
