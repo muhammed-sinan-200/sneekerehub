@@ -1,14 +1,11 @@
-import React from 'react'
-import ShopCorousel from './ShopCorousel'
-import ShopProducts from './ShopProducts'
+import ShopCarousel from "./ShopCarousel";
+import ShopProducts from "./ShopProducts";
 
-const ShopComp = ({ onProductClick }) => {
+export default function ShopComp() {
   return (
     <div>
-      <ShopCorousel />
-      <ShopProducts onProductClick={onProductClick} />
+      <ShopCarousel />
+      <ShopProducts />
     </div>
-  )
+  );
 }
-
-export default ShopComp
