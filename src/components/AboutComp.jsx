@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { HiArrowRight } from "react-icons/hi2";
+import StoryBanner from "./StoryBanner";
 
 const SECTIONS = [
   {
@@ -64,72 +63,17 @@ function useInViewOnce(options) {
 export default function AboutComp() {
   return (
     <div className="w-full bg-white">
-      <HeroHeader />
+      <StoryBanner />
       <div className="divide-y divide-black/5">
         {SECTIONS.map((section, index) => (
           <AboutSection key={section.id} {...section} index={index} />
         ))}
       </div>
-      <ClosingCTA />
     </div>
   );
 }
 
-function HeroHeader() {
-  const [ref, inView] = useInViewOnce();
-  const cls = `transition-all duration-700 ease-out ${
-    inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-  }`;
-  const delay = (ms) => ({ transitionDelay: inView ? `${ms}ms` : "0ms" });
 
-  return (
-    <section
-      ref={ref}
-      className="relative bg-gray-50"
-      aria-labelledby="about-hero-heading"
-    >
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent"
-        aria-hidden
-      />
-      <div className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-        <div className="max-w-3xl">
-          <div className={cls} style={delay(100)}>
-            <div className="flex items-center gap-3">
-              <span
-                className="h-px w-10 bg-[#ff8800] sm:w-12"
-                aria-hidden
-              />
-              <span className="text-[10.5px] font-semibold uppercase tracking-[0.3em] text-gray-500 sm:text-[11.5px]">
-                About SneekerHub
-              </span>
-            </div>
-          </div>
-
-          <h1
-            id="about-hero-heading"
-            className={`mt-5 text-5xl font-black uppercase leading-[0.92] tracking-[-0.02em] text-gray-900 sm:text-6xl lg:text-7xl xl:text-[5.5rem] ${cls}`}
-            style={delay(240)}
-          >
-            <span className="block">Our</span>
-            <span className="block">
-              Story<span className="text-[#ff8800]">.</span>
-            </span>
-          </h1>
-
-          <p
-            className={`mt-6 max-w-xl text-base font-light leading-relaxed text-gray-600 sm:text-lg ${cls}`}
-            style={delay(380)}
-          >
-            From a small workshop in 1959 to a global sneaker culture brand —
-            discover the heritage, craftsmanship, and community that define
-            SneekerHub.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function AboutSection({ chapter, eyebrow, heading, text, image, reversed }) {
   const [ref, inView] = useInViewOnce();
@@ -193,87 +137,6 @@ function AboutSection({ chapter, eyebrow, heading, text, image, reversed }) {
           >
             {text}
           </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ClosingCTA() {
-  const [ref, inView] = useInViewOnce();
-  const cls = `transition-all duration-700 ease-out ${
-    inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-  }`;
-  const delay = (ms) => ({ transitionDelay: inView ? `${ms}ms` : "0ms" });
-
-  return (
-    <section
-      ref={ref}
-      className="relative bg-gray-50"
-      aria-labelledby="about-cta-heading"
-    >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent"
-        aria-hidden
-      />
-      <div className="mx-auto w-full max-w-[1440px] px-4 py-20 text-center sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-        <div className="mx-auto max-w-2xl">
-          <div className={cls} style={delay(100)}>
-            <div className="flex items-center justify-center gap-3">
-              <span
-                className="h-px w-10 bg-[#ff8800] sm:w-12"
-                aria-hidden
-              />
-              <span className="text-[10.5px] font-semibold uppercase tracking-[0.3em] text-gray-500 sm:text-[11.5px]">
-                Continue the Story
-              </span>
-              <span
-                className="h-px w-10 bg-[#ff8800] sm:w-12"
-                aria-hidden
-              />
-            </div>
-          </div>
-
-          <h2
-            id="about-cta-heading"
-            className={`mt-5 text-4xl font-black uppercase leading-[0.95] tracking-[-0.02em] text-gray-900 sm:text-5xl lg:text-6xl ${cls}`}
-            style={delay(240)}
-          >
-            Step Into
-            <br />
-            the Story
-            <span className="text-[#ff8800]">.</span>
-          </h2>
-
-          <p
-            className={`mx-auto mt-5 max-w-md text-base font-light leading-relaxed text-gray-600 sm:text-lg ${cls}`}
-            style={delay(380)}
-          >
-            Every great story deserves a next chapter. Discover the collection
-            that carries it forward.
-          </p>
-
-          <div
-            className={`mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4 ${cls}`}
-            style={delay(520)}
-          >
-            <Link
-              href="/shop"
-              className="group inline-flex items-center gap-2.5 rounded-full bg-black px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition-all duration-300 hover:bg-[#ff8800] hover:text-black hover:shadow-[0_12px_40px_rgba(255,136,0,0.35)] active:scale-[0.97] sm:text-[12px]"
-            >
-              Shop Collection
-              <HiArrowRight
-                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1"
-                aria-hidden
-              />
-            </Link>
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2 rounded-full border border-black/15 px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-gray-900 transition-all duration-300 hover:border-black hover:bg-black hover:text-white sm:text-[12px]"
-            >
-              Get in Touch
-            </Link>
-          </div>
         </div>
       </div>
     </section>

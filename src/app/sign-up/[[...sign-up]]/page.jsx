@@ -1,9 +1,5 @@
 import { SignUp } from "@clerk/nextjs";
 
-export const metadata = {
-  title: "Sign up — SneekerHub",
-  description: "Create your SneekerHub account.",
-};
 
 export default function SignUpPage() {
   return (

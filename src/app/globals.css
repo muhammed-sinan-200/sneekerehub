@@ -36,3 +36,20 @@
     animation: shimmer-wave 3s linear infinite;
   }
 }
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  width: max-content;
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}

@@ -114,7 +114,7 @@ export default function ShopProducts() {
                 aria-hidden
               />
               <span className="text-[10.5px] font-semibold uppercase tracking-[0.3em] text-gray-500 sm:text-[11.5px]">
-                Shop Collection
+                Shop Collections
               </span>
             </div>
           </div>
@@ -131,8 +131,7 @@ export default function ShopProducts() {
             className={`mt-4 text-base font-light leading-relaxed text-gray-600 sm:text-lg ${revealCls}`}
             style={delay(340)}
           >
-            Every silhouette, every drop — handpicked for the SneekerHub
-            collection.
+            Every shape, every drop — handpicked for the SneekerHub collection.
           </p>
         </div>
 

@@ -48,9 +48,8 @@ function DesktopNavLink({ href, label, isActive, onNavigate }) {
       <span className={isActive ? "text-black" : ""}>{label}</span>
       <span
         aria-hidden
-        className={`pointer-events-none absolute -bottom-0.5 left-0 h-[2px] bg-[#ff8800] transition-[width] duration-300 ease-out ${
-          isActive ? "w-full" : "w-0 group-hover:w-full"
-        }`}
+        className={`pointer-events-none absolute -bottom-0.5 left-0 h-[2px] bg-[#ff8800] transition-[width] duration-300 ease-out ${isActive ? "w-full" : "w-0 group-hover:w-full"
+          }`}
       />
     </Link>
   );
@@ -137,17 +136,15 @@ export default function NavbarComp() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 transition-[background-color,box-shadow,backdrop-filter,border-color] duration-300 ${
-          isScrolled
-            ? "border-b border-black/[0.06] bg-white/85 shadow-[0_8px_30px_rgba(15,23,42,0.08)] backdrop-blur-xl"
-            : "border-b border-black/[0.04] bg-white/95 backdrop-blur-md"
-        }`}
+        className={`sticky top-0 z-50 transition-[background-color,box-shadow,backdrop-filter,border-color] duration-300 ${isScrolled
+          ? "border-b border-black/[0.06] bg-white/85 shadow-[0_8px_30px_rgba(15,23,42,0.08)] backdrop-blur-xl"
+          : "border-b border-black/[0.04] bg-white/95 backdrop-blur-md"
+          }`}
       >
         <div className="relative mx-auto w-full max-w-[1920px] px-4 sm:px-6 lg:px-8">
           <div
-            className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 transition-[padding] duration-300 ${
-              isScrolled ? "py-2.5" : "py-3.5 lg:py-4"
-            }`}
+            className={`grid grid-cols-[auto_1fr_auto] items-center gap-4 transition-[padding] duration-300 ${isScrolled ? "py-2.5" : "py-3.5 lg:py-4"
+              }`}
           >
             <Link
               href="/"
@@ -158,11 +155,10 @@ export default function NavbarComp() {
               <img
                 src={LOGO_SRC}
                 alt="SneekerHub"
-                className={`h-auto w-auto transition-[max-height] duration-300 ${
-                  isScrolled
-                    ? "max-h-[44px] sm:max-h-[50px]"
-                    : "max-h-[52px] sm:max-h-[60px]"
-                }`}
+                className={`h-auto w-auto transition-[max-height] duration-300 ${isScrolled
+                  ? "max-h-[44px] sm:max-h-[50px]"
+                  : "max-h-[52px] sm:max-h-[60px]"
+                  }`}
               />
             </Link>
 
@@ -181,24 +177,33 @@ export default function NavbarComp() {
             </nav>
 
             <div className="flex items-center justify-end gap-0.5 sm:gap-1">
-              <SignedOut>
-                <div className="hidden items-center gap-1.5 sm:flex">
-                  <Link
-                    href="/sign-in"
-                    onClick={closeMenu}
-                    className="inline-flex items-center justify-center rounded-full px-3.5 py-2 text-[11.5px] font-semibold uppercase tracking-[0.18em] text-gray-800 transition-colors duration-200 hover:bg-gray-100 hover:text-black"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    href="/sign-up"
-                    onClick={closeMenu}
-                    className="inline-flex items-center justify-center rounded-full bg-black px-3.5 py-2 text-[11.5px] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-200 hover:bg-[#ff8800] hover:text-black"
-                  >
-                    Sign Up
-                  </Link>
-                </div>
-              </SignedOut>
+            <SignedOut>
+  <div className="hidden items-center gap-5 sm:flex">
+    <Link
+      href="/sign-in"
+      onClick={closeMenu}
+      className="group relative inline-flex items-center py-1 text-[12.5px] font-semibold uppercase tracking-[0.2em] text-gray-700 transition-colors duration-200 hover:text-black"
+    >
+      <span>Login</span>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -bottom-0.5 left-0 h-[2px] w-0 bg-black transition-[width] duration-300 ease-out group-hover:w-full"
+      />
+    </Link>
+
+    <Link
+      href="/sign-up"
+      onClick={closeMenu}
+      className="group relative inline-flex items-center py-1 text-[12.5px] font-semibold uppercase tracking-[0.2em] text-gray-700 transition-colors duration-200 hover:text-black"
+    >
+      <span>Sign Up</span>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -bottom-0.5 left-0 h-[2px] w-0 bg-black transition-[width] duration-300 ease-out group-hover:w-full"
+      />
+    </Link>
+  </div>
+</SignedOut>
 
               <SignedIn>
                 <div
@@ -230,11 +235,10 @@ export default function NavbarComp() {
                     role="menu"
                     aria-label="Account menu"
                     aria-hidden={!isUserMenuOpen}
-                    className={`absolute right-0 top-full z-50 mt-2 w-64 origin-top-right rounded-2xl bg-white shadow-[0_20px_60px_rgba(15,23,42,0.18)] ring-1 ring-black/5 transition-all duration-200 ease-out motion-reduce:transition-none ${
-                      isUserMenuOpen
-                        ? "translate-y-0 scale-100 opacity-100"
-                        : "pointer-events-none -translate-y-1 scale-95 opacity-0"
-                    }`}
+                    className={`absolute right-0 top-full z-50 mt-2 w-64 origin-top-right rounded-2xl bg-white shadow-[0_20px_60px_rgba(15,23,42,0.18)] ring-1 ring-black/5 transition-all duration-200 ease-out motion-reduce:transition-none ${isUserMenuOpen
+                      ? "translate-y-0 scale-100 opacity-100"
+                      : "pointer-events-none -translate-y-1 scale-95 opacity-0"
+                      }`}
                   >
                     <div className="border-b border-black/5 px-4 py-3">
                       <p className="truncate text-[13px] font-semibold text-gray-900">
@@ -246,14 +250,14 @@ export default function NavbarComp() {
                         </p>
                       )}
                     </div>
-                    <div className="py-1.5">
+                    <div className="p-1.5">
                       <button
                         type="button"
                         onClick={handleSignOut}
                         role="menuitem"
-                        className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-[12.5px] font-medium text-gray-800 transition-colors hover:bg-gray-50 hover:text-black"
+                        className="flex w-full items-center gap-3 rounded-xl px-4 py-2.5 text-left text-[12.5px] font-medium text-gray-800 transition-all duration-200 hover:bg-red-700 hover:text-white"
                       >
-                        <HiOutlineArrowRightOnRectangle className="h-4 w-4 text-gray-500" />
+                        <HiOutlineArrowRightOnRectangle className="h-4 w-4" />
                         Logout
                       </button>
                     </div>
@@ -280,16 +284,16 @@ export default function NavbarComp() {
 
               <button
                 type="button"
-                className="ml-0.5 inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-900 transition-colors duration-200 hover:bg-gray-100 active:scale-95 lg:hidden"
+                className="inline-flex h-10 w-10 items-center justify-center text-neutral-900 transition-colors duration-200 hover:text-neutral-500 lg:hidden"
                 aria-expanded={isOpen}
                 aria-controls="mobile-drawer"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 onClick={() => setIsOpen((open) => !open)}
               >
                 {isOpen ? (
-                  <HiOutlineXMark className="h-7 w-7" />
+                  <HiOutlineXMark className="h-6 w-6" />
                 ) : (
-                  <HiOutlineBars3 className="h-7 w-7" />
+                  <HiOutlineBars3 className="h-6 w-6" />
                 )}
               </button>
             </div>
@@ -298,75 +302,53 @@ export default function NavbarComp() {
       </header>
 
       <div
-        className={`fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
-          isOpen ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
+        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-200 lg:hidden ${isOpen ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
         onClick={closeMenu}
         aria-hidden
       />
 
       <aside
         id="mobile-drawer"
-        className={`fixed right-0 top-0 z-50 flex h-full w-[88%] max-w-sm flex-col bg-white shadow-2xl transition-transform duration-300 ease-out lg:hidden ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed right-0 top-0 z-50 flex h-full w-full max-w-[320px] flex-col border-l border-neutral-100 bg-white transition-transform duration-250 ease-out lg:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         role="dialog"
         aria-modal="true"
         aria-label="Main menu"
         aria-hidden={!isOpen}
       >
-        <div className="flex items-center justify-between border-b border-black/5 px-5 py-4">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-500">
-            Menu
-          </span>
+        <div className="flex shrink-0 items-center justify-end px-5 pt-5 pb-1">
           <button
             type="button"
             onClick={closeMenu}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-gray-100 hover:text-black"
+            className="inline-flex h-9 w-9 items-center justify-center text-neutral-900 transition-colors duration-200 hover:text-neutral-500"
             aria-label="Close menu"
           >
             <HiOutlineXMark className="h-6 w-6" />
           </button>
         </div>
 
-        <SignedOut>
-          <div className="grid grid-cols-2 gap-2.5 border-b border-black/5 px-5 py-4">
-            <Link
-              href="/sign-in"
-              onClick={closeMenu}
-              className="inline-flex items-center justify-center rounded-full border border-black/15 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-900 transition-colors hover:border-black hover:bg-black hover:text-white"
-            >
-              Login
-            </Link>
-            <Link
-              href="/sign-up"
-              onClick={closeMenu}
-              className="inline-flex items-center justify-center rounded-full bg-black px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#ff8800] hover:text-black"
-            >
-              Sign Up
-            </Link>
-          </div>
-        </SignedOut>
+
 
         <SignedIn>
-          <div className="flex items-center gap-3 border-b border-black/5 px-5 py-4">
+          <div className="flex shrink-0 items-center gap-3 px-5 pb-5">
             {user?.imageUrl ? (
               <img
                 src={user.imageUrl}
                 alt=""
-                className="h-11 w-11 rounded-full object-cover ring-1 ring-black/10"
+                className="h-10 w-10 rounded-full object-cover"
               />
             ) : (
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-gray-900 to-gray-700 text-sm font-bold uppercase text-white">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-900 text-xs font-semibold uppercase text-white">
                 {userInitial}
               </span>
             )}
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold text-gray-900">
+              <p className="truncate text-sm font-medium text-neutral-900">
                 {userDisplayName}
               </p>
               {userEmail && (
-                <p className="truncate text-[12px] text-gray-500">
+                <p className="truncate text-xs text-neutral-500">
                   {userEmail}
                 </p>
               )}
@@ -374,43 +356,22 @@ export default function NavbarComp() {
           </div>
         </SignedIn>
 
-        <nav className="flex-1 overflow-y-auto px-5 py-4" aria-label="Mobile">
-          <ul className="flex flex-col">
-            {NAV_LINKS.map((link, idx) => {
+        <nav className="flex-1 overflow-y-auto px-5" aria-label="Mobile">
+          <ul className="border-t border-neutral-100">
+            {NAV_LINKS.map((link) => {
               const isActive = isLinkActive(link.href, pathname);
               return (
-                <li
-                  key={link.href}
-                  className={`transform transition-all duration-300 ease-out ${
-                    isOpen ? "translate-x-0 opacity-100" : "translate-x-3 opacity-0"
-                  }`}
-                  style={{
-                    transitionDelay: isOpen ? `${idx * 60 + 120}ms` : "0ms",
-                  }}
-                >
+                <li key={link.href} className="border-b border-neutral-100">
                   <Link
                     href={link.href}
                     onClick={closeMenu}
-                    className={`group flex items-center justify-between border-b border-black/5 py-4 text-[15px] font-semibold uppercase tracking-[0.14em] transition-colors ${
-                      isActive ? "text-black" : "text-gray-800 hover:text-black"
-                    }`}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`flex items-center py-4 pl-3 text-sm font-medium tracking-[0.12em] transition-colors duration-200 ${isActive
+                      ? "border-l-2 border-[#ff8800] text-neutral-900"
+                      : "border-l-2 border-transparent text-neutral-500 hover:text-neutral-900"
+                      }`}
                   >
-                    <span className="flex items-center gap-3">
-                      <span
-                        className={`h-1.5 w-1.5 rounded-full transition-all duration-200 ${
-                          isActive
-                            ? "scale-100 bg-[#ff8800]"
-                            : "scale-0 bg-[#ff8800] group-hover:scale-100"
-                        }`}
-                      />
-                      {link.label}
-                    </span>
-                    <span
-                      aria-hidden
-                      className="text-gray-300 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-black"
-                    >
-                      →
-                    </span>
+                    {link.label}
                   </Link>
                 </li>
               );
@@ -418,37 +379,41 @@ export default function NavbarComp() {
           </ul>
         </nav>
 
-        <div className="border-t border-black/5 bg-white px-5 py-5">
-          <div className="grid grid-cols-2 gap-3">
-            <SignedOut>
+        <div className="shrink-0 border-t border-neutral-100 px-5 py-4">
+          <SignedOut>
+            <div className="flex gap-2">
               <Link
                 href="/sign-in"
                 onClick={closeMenu}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-900 transition-colors hover:border-black hover:bg-black hover:text-white"
+                className="flex flex-1 items-center justify-center border border-neutral-200 py-3 text-xs font-medium tracking-wide text-neutral-900 transition-colors duration-200 hover:border-neutral-900"
               >
-                <HiOutlineUser className="h-4 w-4" />
+                <HiOutlineUser className="mr-2 h-4 w-4" aria-hidden />
                 Sign In
               </Link>
-            </SignedOut>
-            <SignedIn>
-              <button
-                type="button"
-                onClick={handleSignOut}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-900 transition-colors hover:border-black hover:bg-black hover:text-white"
+
+              <Link
+                href="/sign-up"
+                onClick={closeMenu}
+                className="flex flex-1 items-center justify-center bg-neutral-900 py-3 text-xs font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-800"
               >
-                <HiOutlineArrowRightOnRectangle className="h-4 w-4" />
-                Logout
-              </button>
-            </SignedIn>
-            <Link
-              href="/cartPage"
-              onClick={closeMenu}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-black px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#ff8800] hover:text-black"
+                Sign Up
+              </Link>
+            </div>
+          </SignedOut>
+
+          <SignedIn>
+            <button
+              type="button"
+              onClick={handleSignOut}
+              className="flex w-full items-center justify-center gap-2 border border-neutral-200 py-3 text-xs font-medium tracking-wide text-neutral-900 transition-colors duration-200 hover:border-neutral-900"
             >
-              <HiOutlineShoppingBag className="h-4 w-4" />
-              Bag{cartCount > 0 ? ` · ${cartBadge}` : ""}
-            </Link>
-          </div>
+              <HiOutlineArrowRightOnRectangle
+                className="h-4 w-4"
+                aria-hidden
+              />
+              Log out
+            </button>
+          </SignedIn>
         </div>
       </aside>
     </>

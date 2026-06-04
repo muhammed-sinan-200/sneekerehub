@@ -6,11 +6,11 @@ import { HiArrowRight } from "react-icons/hi2";
 
 const HERO_BG = "/homebanner.webp";
 
-const META_ITEMS = [
-  "100% Authentic",
-  "Free delivery over $150",
-  "EU 36 — 47",
-];
+// const META_ITEMS = [
+//   "100% Authentic",
+//   "Free delivery over $150",
+//   "EU 36 — 47",
+// ];
 
 export default function BannerComp() {
   const [mounted, setMounted] = useState(false);
@@ -58,7 +58,7 @@ export default function BannerComp() {
                 aria-hidden
               />
               <span className="text-[10.5px] font-semibold uppercase tracking-[0.3em] text-white/80 sm:text-[11.5px]">
-                Latest Drop — 2026
+                SneekerHub
               </span>
             </div>
           </div>
@@ -95,7 +95,7 @@ export default function BannerComp() {
               />
             </Link>
 
-            <Link
+            {/* <Link
               href="/about"
               className="group inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-white/[0.04] px-7 py-3.5 text-[11.5px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md transition-all duration-300 hover:border-white/70 hover:bg-white/[0.08] sm:text-[12px]"
             >
@@ -106,10 +106,10 @@ export default function BannerComp() {
               >
                 →
               </span>
-            </Link>
+            </Link> */}
           </div>
 
-          <div
+          {/* <div
             className={`mt-auto hidden flex-wrap items-center gap-x-6 gap-y-2 pt-16 text-[10.5px] font-semibold uppercase tracking-[0.24em] text-white/55 sm:flex ${revealCls}`}
             style={revealDelay(800)}
           >
@@ -124,7 +124,7 @@ export default function BannerComp() {
                 )}
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
 

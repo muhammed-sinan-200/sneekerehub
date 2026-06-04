@@ -72,7 +72,7 @@ export default function BannerComp2() {
                     aria-hidden
                   />
                   <span className="text-[10.5px] font-semibold uppercase tracking-[0.3em] text-white/80 sm:text-[11.5px]">
-                    Now Available
+                    Long waited
                   </span>
                 </div>
               </div>

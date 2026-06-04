@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LOGO_SRC, CONTACT_DETAILS, SOCIAL_LINKS } from "@/lib/site";
+import { LOGO_SRC, CONTACT_DETAILS } from "@/lib/site";
 
 const SHOP_LINKS = [
   { href: "/shop", label: "New Arrivals" },
@@ -9,24 +9,15 @@ const SHOP_LINKS = [
 ];
 
 const HELP_LINKS = [
-  { href: "#", label: "Shipping & Returns" },
-  { href: "#", label: "Size Guide" },
-  { href: "#", label: "FAQ" },
-  { href: "#", label: "Track Order" },
+  { href: "/contact", label: "Support" },
+  { href: "/contact", label: "Get Help" },
 ];
 
 const COMPANY_LINKS = [
   { href: "/about", label: "Our Story" },
   { href: "/contact", label: "Contact" },
-  { href: "#", label: "Careers" },
-  { href: "#", label: "Press" },
 ];
 
-const LEGAL_LINKS = [
-  { href: "#", label: "Privacy" },
-  { href: "#", label: "Terms" },
-  { href: "#", label: "Cookies" },
-];
 
 export default function FooterComp() {
   const currentYear = new Date().getFullYear();
@@ -111,39 +102,12 @@ export default function FooterComp() {
         </div>
       </div>
 
-      <div className="border-t border-black/[0.06]">
-        <div className="mx-auto w-full max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-between gap-5 sm:flex-row sm:gap-4">
-            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-gray-500 sm:justify-start">
-              <span>© {currentYear} SneekerHub</span>
-              {LEGAL_LINKS.map((link) => (
-                <span key={link.label} className="flex items-center gap-3">
-                  <span className="text-gray-300" aria-hidden>
-                    ·
-                  </span>
-                  <a
-                    href={link.href}
-                    className="transition-colors duration-200 hover:text-black"
-                  >
-                    {link.label}
-                  </a>
-                </span>
-              ))}
-            </div>
+      <div className="border-t border-black/10">
+        <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center justify-center gap-4 px-4 py-5 text-center sm:flex-row sm:text-left sm:px-6 lg:px-8">
 
-            <div className="flex items-center gap-1.5">
-              {SOCIAL_LINKS.map(({ href, label, icon: Icon, hoverClass }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className={`inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-600 transition-all duration-200 hover:scale-110 hover:bg-white hover:shadow-[0_4px_14px_rgba(15,23,42,0.08)] ${hoverClass}`}
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
-            </div>
-          </div>
+          <p className="text-center text-[11px] font-medium uppercase tracking-[0.18em] text-gray-500">
+            © {currentYear} SneekerHub. All Rights Reserved.
+          </p>
         </div>
       </div>
     </footer>

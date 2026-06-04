@@ -106,7 +106,7 @@ export default function NewArrivalsComp({ onProductClick }) {
               className={`mt-4 text-base font-light leading-relaxed text-gray-600 sm:text-lg ${revealCls}`}
               style={delay(REVEAL_BASE_MS + HEADER_STAGGER[2])}
             >
-              Handpicked silhouettes from this season&apos;s freshest drops.
+              Elevated styles from this season’s newest arrivals.
             </p>
           </div>
 
