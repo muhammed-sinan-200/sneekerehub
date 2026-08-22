@@ -1,11 +1,8 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Montserrat is injected as --font-montserrat by next/font in layout.js */
   --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 }
-
-/* ─── Shimmer sweep on section headings (NEW ARRIVALS, SNEEKERS) ─────────── */
 
 @keyframes shimmer-wave {
   0%   { left: 5%; }

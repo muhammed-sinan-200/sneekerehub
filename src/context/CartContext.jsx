@@ -1,12 +1,18 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 const CartContext = createContext(null);
+const PERSIST_DEBOUNCE_MS = 300;
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
   const [isHydrated, setIsHydrated] = useState(false);
+  const cartItemsRef = useRef(cartItems);
+  const isHydratedRef = useRef(isHydrated);
+
+  cartItemsRef.current = cartItems;
+  isHydratedRef.current = isHydrated;
 
   useEffect(() => {
     try {
@@ -20,10 +26,22 @@ export function CartProvider({ children }) {
 
   useEffect(() => {
     if (!isHydrated) return;
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+    const timeoutId = window.setTimeout(() => {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, PERSIST_DEBOUNCE_MS);
+
+    return () => clearTimeout(timeoutId);
   }, [cartItems, isHydrated]);
 
-  const addToCart = (product) => {
+  useEffect(() => {
+    return () => {
+      if (!isHydratedRef.current) return;
+      localStorage.setItem("cartItems", JSON.stringify(cartItemsRef.current));
+    };
+  }, []);
+
+  const addToCart = useCallback((product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
 
@@ -37,9 +55,9 @@ export function CartProvider({ children }) {
 
       return [...prevItems, { ...product, quantity: 1 }];
     });
-  };
+  }, []);
 
-  const decreaseQuantity = (id) => {
+  const decreaseQuantity = useCallback((id) => {
     setCartItems((prevItems) =>
       prevItems
         .map((item) =>
@@ -47,14 +65,28 @@ export function CartProvider({ children }) {
         )
         .filter((item) => item.quantity > 0)
     );
-  };
+  }, []);
 
-  const clearCart = () => setCartItems([]);
+  const removeFromCart = useCallback((id) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  }, []);
+
+  const clearCart = useCallback(() => setCartItems([]), []);
+
+  const value = useMemo(
+    () => ({
+      cartItems,
+      addToCart,
+      decreaseQuantity,
+      removeFromCart,
+      clearCart,
+      isHydrated,
+    }),
+    [cartItems, addToCart, decreaseQuantity, removeFromCart, clearCart, isHydrated],
+  );
 
   return (
-    <CartContext.Provider
-      value={{ cartItems, addToCart, decreaseQuantity, clearCart, isHydrated }}
-    >
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );

@@ -15,7 +15,6 @@ export function ModalProvider({ children }) {
 
   const closeModal = () => {
     setShowModal(false);
-    // Delay clearing the product so the close animation doesn't flash blank content.
     setTimeout(() => setSelectedProduct(null), 200);
   };
 
